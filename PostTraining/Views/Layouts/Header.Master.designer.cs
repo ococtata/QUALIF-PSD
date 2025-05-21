@@ -42,6 +42,15 @@ namespace PostTraining.Views.Layouts
         protected global::System.Web.UI.WebControls.Button button_home;
 
         /// <summary>
+        /// button_add control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button button_add;
+
+        /// <summary>
         /// button_cart control.
         /// </summary>
         /// <remarks>

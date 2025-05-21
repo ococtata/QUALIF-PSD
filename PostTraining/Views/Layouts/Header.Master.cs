@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PostTraining.Domain.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -9,9 +10,81 @@ namespace PostTraining.Views.Layouts
 {
     public partial class Header1 : System.Web.UI.MasterPage
     {
+        private String currentPage = "";
+        private String homePage = "";
+        private String addProductPage = "";
         protected void Page_Load(object sender, EventArgs e)
         {
+            getCurrentPage();
+            getHomePage();
 
+            User user = Session["user"] as User;
+
+            if(user == null)
+            {
+                Response.Redirect("~/Views/Auth/LoginPage.aspx");
+                return;
+            }
+
+            if (user.Role.Equals("admin"))
+            {
+                button_add.Visible = true;
+            }
+            else
+            {
+                button_cart.Visible = true;
+            }
+        }
+
+        protected void button_home_Click(object sender, EventArgs e)
+        {
+            if (!currentPage.EndsWith("homepage.aspx"))
+            {
+                Response.Redirect("~/Views/Common/HomePage.aspx");
+            }
+        }
+
+        protected void button_add_Click(object sender, EventArgs e)
+        {
+            if (!currentPage.EndsWith("addproductpage.aspx"))
+            {
+                Response.Redirect("~/Views/Admin/AddProductPage.aspx");
+            }
+        }
+
+        protected void button_cart_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void button_logout_Click(object sender, EventArgs e)
+        {
+            if (Request.Cookies["user_cookie"] != null)
+            {
+                HttpCookie cookie = new HttpCookie("user_cookie");
+                cookie.Expires = DateTime.Now.AddDays(-1);
+                Response.Cookies.Add(cookie);
+            }
+
+            Session.Clear();
+            Session.Abandon();
+
+            Response.Redirect("~/Views/Auth/LoginPage.aspx");
+        }
+
+        private void getCurrentPage()
+        {
+            currentPage = Request.Url.AbsolutePath.ToLower();
+        }
+
+        private void getHomePage()
+        {
+            homePage = ResolveUrl("~/Views/Common/HomePage.aspx").ToLower();
+        }
+
+        private void getAddProductPage()
+        {
+            addProductPage = ResolveUrl("~/Views/Admin/AddProductPage.aspx").ToLower();
         }
     }
 }

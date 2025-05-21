@@ -23,7 +23,13 @@ namespace PostTraining.Infrastructure.Repositories
 
         public User GetUserById(String id)
         {
-            User user = db.Users.Find(id);
+            Guid guidId;
+            if (!Guid.TryParse(id, out guidId))
+            {
+                return null;
+            }
+
+            User user = db.Users.Find(guidId);
             return user;
         }
     }

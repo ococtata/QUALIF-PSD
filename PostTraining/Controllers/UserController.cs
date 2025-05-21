@@ -63,6 +63,16 @@ namespace PostTraining.Controllers
 
         public Response<User> LoginUserByCookie(string cookie)
         {
+            System.Diagnostics.Debug.WriteLine("Cookie: " + cookie);
+            if(cookie == null)
+            {
+                return new Response<User>
+                {
+                    Success = false,
+                    Message = "Cookie is null",
+                    Payload = null,
+                };
+            }
             return userHandler.LoginUserByCookie(cookie);
         }
     }

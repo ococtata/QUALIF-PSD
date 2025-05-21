@@ -80,6 +80,7 @@ namespace PostTraining.Application.Handlers
         public Response<Product> UpdateProduct(String id, String name, int rarity, float price, String desc, String type, int stock)
         {
             Product product = productFactory.CreateProduct(name, rarity, price, desc, type, stock);
+            product.Id = Guid.Parse(id);
 
             Product updatedProduct = productRepo.UpdateProduct(product);
 

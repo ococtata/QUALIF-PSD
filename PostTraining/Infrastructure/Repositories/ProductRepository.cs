@@ -10,7 +10,6 @@ namespace PostTraining.Infrastructure.Repositories
     public class ProductRepository
     {
         private LocalDatabaseEntities1 db = Database.GetInstance();
-        private ProductFactory productFactory = new ProductFactory();
 
         public List<Product> GetProducts()
         {
@@ -21,7 +20,13 @@ namespace PostTraining.Infrastructure.Repositories
 
         public Product GetProductById(String id)
         {
-            Product product = db.Products.Find(id);
+            Guid guidId;
+            if (!Guid.TryParse(id, out guidId))
+            {
+                return null;
+            }
+
+            Product product = db.Products.Find(guidId);
             if (product == null) return null;
 
             return product;
@@ -43,6 +48,7 @@ namespace PostTraining.Infrastructure.Repositories
 
         public Product UpdateProduct(Product product)
         {
+
             Product updateProduct = db.Products.Find(product.Id);
 
             if (updateProduct == null) return null;
@@ -60,7 +66,13 @@ namespace PostTraining.Infrastructure.Repositories
 
         public bool DeleteProduct(String id)
         {
-            Product product = db.Products.Find(id);
+            Guid guidId;
+            if (!Guid.TryParse(id, out guidId))
+            {
+                return false;   
+            }
+
+            Product product = db.Products.Find(guidId);
             if (product == null) return false;
 
 

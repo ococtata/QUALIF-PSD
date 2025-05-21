@@ -90,6 +90,7 @@
       <DependentUpon>DatabaseModel.edmx</DependentUpon>
       <LastGenOutput>DatabaseModel.cs</LastGenOutput>
     </Content>
+    <Content Include="Views\Admin\AddProductPage.aspx" />
     <Content Include="Views\Admin\UpdateProductPage.aspx" />
     <Content Include="Views\Auth\LoginPage.aspx" />
     <Content Include="Views\Auth\RegisterPage.aspx" />
@@ -104,7 +105,6 @@
     <Compile Include="Application\Handlers\UserHandler.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\UserController.cs" />
-    <Compile Include="Domain\DTO\ProductDTO.cs" />
     <Compile Include="Domain\Models\CartItem.cs">
       <DependentUpon>DatabaseModel.tt</DependentUpon>
     </Compile>
@@ -126,9 +126,6 @@
     <Compile Include="Domain\Models\Product.cs">
       <DependentUpon>DatabaseModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Domain\Models\ProductDetail.cs">
-      <DependentUpon>DatabaseModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Domain\Models\Transaction.cs">
       <DependentUpon>DatabaseModel.tt</DependentUpon>
     </Compile>
@@ -141,12 +138,17 @@
     <Compile Include="Factories\ProductFactory.cs" />
     <Compile Include="Factories\UserFactory.cs" />
     <Compile Include="Infrastructure\Database\Database.cs" />
-    <Compile Include="Infrastructure\Middleware\Middleware.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
+    <Compile Include="Infrastructure\Database\ProductSeeder.cs" />
     <Compile Include="Infrastructure\Repositories\ProductRepository.cs" />
     <Compile Include="Infrastructure\Repositories\UserRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Views\Admin\AddProductPage.aspx.cs">
+      <DependentUpon>AddProductPage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\Admin\AddProductPage.aspx.designer.cs">
+      <DependentUpon>AddProductPage.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Views\Admin\UpdateProductPage.aspx.cs">
       <DependentUpon>UpdateProductPage.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

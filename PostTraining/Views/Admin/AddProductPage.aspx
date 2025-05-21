@@ -1,14 +1,9 @@
-﻿<%@ Page Title="Cyberware Store" Language="C#" MasterPageFile="~/Views/Layouts/Header.Master" AutoEventWireup="true" CodeBehind="UpdateProductPage.aspx.cs" Inherits="PostTraining.Views.Admin.UpdateProductPage" %>
-
+﻿<%@ Page Title="Cyberware Store" Language="C#" MasterPageFile="~/Views/Layouts/Header.Master" AutoEventWireup="true" CodeBehind="AddProductPage.aspx.cs" Inherits="PostTraining.Views.Admin.AddProductPage" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <h1>Update Product Page</h1>
+    <h1>Add Product Page</h1>
     <div>
-        <div>
-            <asp:Label ID="label_id" runat="server" Text="ID"></asp:Label>
-            <asp:TextBox ID="textbox_id" runat="server" ReadOnly="true"></asp:TextBox>
-        </div>
         <div>
             <asp:Label ID="label_name" runat="server" Text="Name"></asp:Label>
             <asp:TextBox ID="textbox_name" runat="server"></asp:TextBox>
@@ -34,11 +29,11 @@
             <asp:TextBox ID="textbox_stock" runat="server" TextMode="Number"></asp:TextBox>
         </div>
         <div>
-            <asp:Label ID="label_error" runat="server" Text="Error"></asp:Label>
+            <asp:Label ID="label_error" runat="server"></asp:Label>
         </div>
         <div>
             <asp:Button ID="button_cancel" runat="server" Text="Cancel" OnClick="button_cancel_Click" />
-            <asp:Button ID="button_update" runat="server" Text="Update" OnClick="button_update_Click" />
+            <asp:Button ID="button_add" runat="server" Text="Add" OnClick="button_add_Click" />
         </div>
     </div>
 </asp:Content>

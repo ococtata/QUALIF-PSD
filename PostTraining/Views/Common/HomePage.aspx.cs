@@ -1,7 +1,6 @@
 ﻿using PostTraining.Application.Common;
 using PostTraining.Controllers;
 using PostTraining.Domain.Models;
-using PostTraining.Infrastructure.Middleware;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,13 +10,38 @@ using System.Web.UI.WebControls;
 
 namespace PostTraining.Views
 {
-    public partial class HomePage : Middleware
+    public partial class HomePage : System.Web.UI.Page
     {
         private ProductController productController = new ProductController();
+        private UserController userController = new UserController();
+
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Session["user"] == null && Request.Cookies["user_cookie"] == null)
+            {
+                Response.Redirect("~/Views/Auth/LoginPage.aspx");
+                return;
+            }
+
+            if (Session["user"] == null)
+            {
+                String cookie = Request.Cookies["user_cookie"].Value;
+
+                Response<User> resp = userController.LoginUserByCookie(cookie);
+
+                if(!resp.Success)
+                {
+                    Request.Cookies["user_cookie"].Expires = DateTime.Now.AddDays(-1);
+                    Response.Redirect("~/Views/Auth/LoginPage.aspx");
+                    return;
+                }
+
+                Session["user"] = resp.Payload;
+            }
+
+            User currentUser = Session["user"] as User;
+
             RefreshProductGridView();
-            OnLoad(e);
 
             System.Diagnostics.Debug.WriteLine("Current user is: " + currentUser);
 
@@ -50,6 +74,11 @@ namespace PostTraining.Views
             String id = row.Cells[0].Text;
 
             Response<Product> resp = productController.DeleteProduct(id);
+
+            if (resp.Success)
+            {
+                RefreshProductGridView();
+            }
         }
 
         protected void gridview_product_RowEditing(object sender, GridViewEditEventArgs e)

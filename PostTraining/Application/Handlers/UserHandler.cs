@@ -66,6 +66,7 @@ namespace PostTraining.Application.Handlers
         public Response<User> LoginUserByCookie(String cookie)
         {
             String userId = CookieHelper.Decrypt(cookie);
+            System.Diagnostics.Debug.WriteLine("Login user with cookie got user id: " + userId);
 
             User user = userRepo.GetUserById(userId);
             System.Diagnostics.Debug.WriteLine(user);
