@@ -69,7 +69,7 @@ namespace PostTraining.Infrastructure.Repositories
             Guid guidId;
             if (!Guid.TryParse(id, out guidId))
             {
-                return false;   
+                return false;
             }
 
             Product product = db.Products.Find(guidId);

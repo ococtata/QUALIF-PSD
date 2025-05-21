@@ -20,7 +20,7 @@ namespace PostTraining.Views.Layouts
 
             User user = Session["user"] as User;
 
-            if(user == null)
+            if (user == null)
             {
                 Response.Redirect("~/Views/Auth/LoginPage.aspx");
                 return;

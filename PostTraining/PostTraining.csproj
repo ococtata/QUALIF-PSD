@@ -95,14 +95,17 @@
     <Content Include="Views\Auth\LoginPage.aspx" />
     <Content Include="Views\Auth\RegisterPage.aspx" />
     <Content Include="Views\Common\HomePage.aspx" />
+    <Content Include="Views\Customer\CartPage.aspx" />
     <Content Include="Views\Styles\Header.css" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Application\Common\CookieHelper.cs" />
     <Compile Include="Application\Common\Response.cs" />
+    <Compile Include="Application\Handlers\CartHandler.cs" />
     <Compile Include="Application\Handlers\ProductHandler.cs" />
     <Compile Include="Application\Handlers\UserHandler.cs" />
+    <Compile Include="Controllers\CartController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Domain\Models\CartItem.cs">
@@ -135,11 +138,14 @@
     <Compile Include="Domain\Models\User.cs">
       <DependentUpon>DatabaseModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Factories\CartFactory.cs" />
     <Compile Include="Factories\ProductFactory.cs" />
     <Compile Include="Factories\UserFactory.cs" />
     <Compile Include="Infrastructure\Database\Database.cs" />
     <Compile Include="Infrastructure\Database\ProductSeeder.cs" />
+    <Compile Include="Infrastructure\Repositories\CartRepository.cs" />
     <Compile Include="Infrastructure\Repositories\ProductRepository.cs" />
+    <Compile Include="Infrastructure\Repositories\TransactionRepository.cs" />
     <Compile Include="Infrastructure\Repositories\UserRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Views\Admin\AddProductPage.aspx.cs">
@@ -177,6 +183,13 @@
     <Compile Include="Views\Common\HomePage.aspx.designer.cs">
       <DependentUpon>HomePage.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Views\Customer\CartPage.aspx.cs">
+      <DependentUpon>CartPage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\Customer\CartPage.aspx.designer.cs">
+      <DependentUpon>CartPage.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Views\Layouts\Header.Master.cs">
       <DependentUpon>Header.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -205,9 +218,7 @@
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Views\Customer\" />
-  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

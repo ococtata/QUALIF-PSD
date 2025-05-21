@@ -12,11 +12,16 @@ namespace PostTraining.Views
 {
     public partial class HomePage : System.Web.UI.Page
     {
+        private User currentUser = null;
+
         private ProductController productController = new ProductController();
         private UserController userController = new UserController();
+        private CartController cartController = new CartController();
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            label_error.Text = "";
+
             if (Session["user"] == null && Request.Cookies["user_cookie"] == null)
             {
                 Response.Redirect("~/Views/Auth/LoginPage.aspx");
@@ -29,7 +34,7 @@ namespace PostTraining.Views
 
                 Response<User> resp = userController.LoginUserByCookie(cookie);
 
-                if(!resp.Success)
+                if (!resp.Success)
                 {
                     Request.Cookies["user_cookie"].Expires = DateTime.Now.AddDays(-1);
                     Response.Redirect("~/Views/Auth/LoginPage.aspx");
@@ -39,9 +44,9 @@ namespace PostTraining.Views
                 Session["user"] = resp.Payload;
             }
 
-            User currentUser = Session["user"] as User;
+            currentUser = Session["user"] as User;
 
-            RefreshProductGridView();
+            if(!IsPostBack) RefreshProductGridView();
 
             System.Diagnostics.Debug.WriteLine("Current user is: " + currentUser);
 
@@ -66,6 +71,11 @@ namespace PostTraining.Views
                 gridview_product.DataSource = resp.Payload;
                 gridview_product.DataBind();
             }
+            else
+            {
+                label_error.ForeColor = System.Drawing.Color.Red;
+                label_error.Text = resp.Message;
+            }
         }
 
         protected void gridview_product_RowDeleting(object sender, GridViewDeleteEventArgs e)
@@ -73,11 +83,16 @@ namespace PostTraining.Views
             GridViewRow row = gridview_product.Rows[e.RowIndex];
             String id = row.Cells[0].Text;
 
-            Response<Product> resp = productController.DeleteProduct(id);
+            Response<Boolean> resp = productController.DeleteProduct(id);
 
             if (resp.Success)
             {
                 RefreshProductGridView();
+            }
+            else
+            {
+                label_error.ForeColor = System.Drawing.Color.Red;
+                label_error.Text = resp.Message;
             }
         }
 
@@ -91,7 +106,36 @@ namespace PostTraining.Views
 
         protected void gridview_product_RowCommand(object sender, GridViewCommandEventArgs e)
         {
+            if (e.CommandName == "Add")
+            {
+                int index = Convert.ToInt32(e.CommandArgument);
+                GridViewRow row = gridview_product.Rows[index];
 
+                string productId = row.Cells[0].Text;
+
+                TextBox quantityTextbox = (TextBox)row.FindControl("textbox_quantity");
+                System.Diagnostics.Debug.WriteLine("Quantity textbox value: " + quantityTextbox.Text);
+
+
+                int quantity = 0;
+
+                if (!int.TryParse(quantityTextbox.Text, out quantity) || quantity < 1)
+                {
+                    quantity = 0;
+                }
+
+                Response<CartItem> resp = cartController.AddCartItem(currentUser.Id.ToString(), productId, quantity);
+
+                if (resp.Success)
+                {
+                    RefreshProductGridView();
+                }
+                else
+                {
+                    label_error.ForeColor = System.Drawing.Color.Red;
+                    label_error.Text = resp.Message;
+                }
+            }
         }
     }
 }

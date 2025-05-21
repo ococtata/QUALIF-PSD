@@ -9,7 +9,7 @@ using System.Web;
 namespace PostTraining.Controllers
 {
     public class ProductController
-    {        
+    {
         private ProductHandler productHandler = new ProductHandler();
         private String err = "";
 
@@ -39,7 +39,7 @@ namespace PostTraining.Controllers
         }
         public Response<Product> CreateProduct(String name, int tier, float price, String desc, String type, int stock)
         {
-            if(name.Equals("") ||  tier.ToString().Equals("") || price.ToString().Equals("") || desc.Equals("") || type.Equals("") || stock.ToString().Equals(""))
+            if (name.Equals("") || tier.ToString().Equals("") || price.ToString().Equals("") || desc.Equals("") || type.Equals("") || stock.ToString().Equals(""))
             {
                 err = "Input cannot be empty";
             }
@@ -54,7 +54,7 @@ namespace PostTraining.Controllers
                 err = "Stock cannot be below 0.";
             }
 
-            if(!err.Equals(""))
+            if (!err.Equals(""))
             {
                 return new Response<Product>
                 {
@@ -64,7 +64,7 @@ namespace PostTraining.Controllers
                 };
             }
 
-            return productHandler.CreateProduct(name, tier, price, desc, type, stock); 
+            return productHandler.CreateProduct(name, tier, price, desc, type, stock);
         }
 
         public Response<Product> UpdateProduct(String id, String name, int tier, float price, String desc, String type, int stock)
@@ -97,20 +97,20 @@ namespace PostTraining.Controllers
             return productHandler.UpdateProduct(id, name, tier, price, desc, type, stock);
         }
 
-        public Response<Product> DeleteProduct(String id)
+        public Response<Boolean> DeleteProduct(String id)
         {
-            if(id.Equals(""))
+            if (id.Equals(""))
             {
                 err = "Input cannot be empty";
             }
 
             if (!err.Equals(""))
             {
-                return new Response<Product>
+                return new Response<Boolean>
                 {
                     Success = false,
                     Message = err,
-                    Payload = null
+                    Payload = false
                 };
             }
 

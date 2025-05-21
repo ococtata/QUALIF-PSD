@@ -11,7 +11,7 @@ namespace PostTraining.Infrastructure.Repositories
         private LocalDatabaseEntities1 db = Database.GetInstance();
         public User GetUserByEmail(String email)
         {
-            User user  = db.Users.Where(u => u.Email == email).FirstOrDefault();
+            User user = db.Users.Where(u => u.Email == email).FirstOrDefault();
             return user;
         }
 

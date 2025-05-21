@@ -19,13 +19,13 @@
                 <asp:TextBox ID="textbox_password" runat="server" TextMode="Password"></asp:TextBox>
             </div>
             <div>
-                <asp:CheckBox ID="checkbox_remember" runat="server" Text="Remember me"/>
+                <asp:CheckBox ID="checkbox_remember" runat="server" Text="Remember me" />
             </div>
             <div>
                 <asp:Label ID="label_error" runat="server" Text="Error"></asp:Label>
             </div>
             <div>
-                <asp:Button ID="button_login" OnClick="button_login_Click" runat="server" Text="Login"/>
+                <asp:Button ID="button_login" OnClick="button_login_Click" runat="server" Text="Login" />
             </div>
             <div>
                 <asp:Label ID="label_lregister" runat="server" Text="Don't have an account?"></asp:Label>

@@ -50,12 +50,12 @@ namespace PostTraining.Views.Admin
                 return;
             }
 
-            if(!IsPostBack)
+            if (!IsPostBack)
             {
                 String id = Request["Id"];
                 Response<Product> respProduct = productController.GetProduct(id);
 
-                if(respProduct.Success)
+                if (respProduct.Success)
                 {
                     Product product = respProduct.Payload;
                     textbox_id.Text = product.Id.ToString();
@@ -83,7 +83,7 @@ namespace PostTraining.Views.Admin
         {
             String id = textbox_id.Text;
             String name = textbox_name.Text;
-            String desc = textbox_description.Text;  
+            String desc = textbox_description.Text;
             float price = float.Parse(textbox_price.Text);
             String type = textbox_type.Text;
             int tier = int.Parse(textbox_tier.Text);

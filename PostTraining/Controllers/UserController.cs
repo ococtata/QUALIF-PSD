@@ -15,7 +15,7 @@ namespace PostTraining.Controllers
         private UserHandler userHandler = new UserHandler();
         public Response<User> Login(String email, String password)
         {
-            if(email.Equals("") || password.Equals(""))
+            if (email.Equals("") || password.Equals(""))
             {
                 err = "Input cannot be empty";
             }
@@ -35,7 +35,7 @@ namespace PostTraining.Controllers
 
         public Response<User> Register(String name, String email, String password)
         {
-            if(name.Equals("") || email.Equals("") || password.Equals(""))
+            if (name.Equals("") || email.Equals("") || password.Equals(""))
             {
                 err = "Input cannot be empty";
             }
@@ -43,12 +43,12 @@ namespace PostTraining.Controllers
             {
                 err = "Email must be valid format (contains \"@\" and \".com\")";
             }
-            else if(password.Length < 6)
+            else if (password.Length < 6)
             {
                 err = "Password length must be at least 6 characters";
             }
 
-            if(err == "")
+            if (err == "")
             {
                 return userHandler.Register(name, email, password);
             }
@@ -64,7 +64,7 @@ namespace PostTraining.Controllers
         public Response<User> LoginUserByCookie(string cookie)
         {
             System.Diagnostics.Debug.WriteLine("Cookie: " + cookie);
-            if(cookie == null)
+            if (cookie == null)
             {
                 return new Response<User>
                 {

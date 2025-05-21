@@ -49,7 +49,7 @@ namespace PostTraining.Application.Handlers
             };
         }
 
-        public Response<Product> CreateProduct(String name, int rarity, float price, String desc, String type, int stock)
+        public Response<Product> CreateProduct(String name, int tier, float price, String desc, String type, int stock)
         {
             String nameTrimmed = name.Trim();
             Product productDTO = productRepo.GetProductByName(nameTrimmed);
@@ -64,7 +64,7 @@ namespace PostTraining.Application.Handlers
                 };
             };
 
-            Product product = productFactory.CreateProduct(nameTrimmed, rarity, price, desc, type, stock);
+            Product product = productFactory.CreateProduct(nameTrimmed, tier, price, desc, type, stock);
 
             productRepo.CreateProduct(product);
 
@@ -77,9 +77,9 @@ namespace PostTraining.Application.Handlers
             };
         }
 
-        public Response<Product> UpdateProduct(String id, String name, int rarity, float price, String desc, String type, int stock)
+        public Response<Product> UpdateProduct(String id, String name, int tier, float price, String desc, String type, int stock)
         {
-            Product product = productFactory.CreateProduct(name, rarity, price, desc, type, stock);
+            Product product = productFactory.CreateProduct(name, tier, price, desc, type, stock);
             product.Id = Guid.Parse(id);
 
             Product updatedProduct = productRepo.UpdateProduct(product);
@@ -102,25 +102,25 @@ namespace PostTraining.Application.Handlers
             };
         }
 
-        public Response<Product> DeleteProduct(String id)
+        public Response<Boolean> DeleteProduct(String id)
         {
             Boolean success = productRepo.DeleteProduct(id);
 
             if(!success)
             {
-                return new Response<Product>()
+                return new Response<Boolean>()
                 {
                     Success = false,
                     Message = "Product with id " + id + " not found",
-                    Payload = null,
+                    Payload = false,
                 };
             }
 
-            return new Response<Product>()
+            return new Response<Boolean>()
             {
                 Success = true,
                 Message = "Successfully deleted product with id: " + id,
-                Payload = null,
+                Payload = true,
             };
         }
     }

@@ -27,7 +27,7 @@
         </div>
         <div>
             <asp:Label ID="label_type" runat="server" Text="Type"></asp:Label>
-            <asp:TextBox ID="textbox_type" runat="server" ></asp:TextBox>
+            <asp:TextBox ID="textbox_type" runat="server"></asp:TextBox>
         </div>
         <div>
             <asp:Label ID="label_stock" runat="server" Text="Stock"></asp:Label>

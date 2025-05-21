@@ -33,7 +33,7 @@ namespace PostTraining.Views.Auth
 
             Response<User> resp = userController.Register(name, email, password);
 
-            if(!resp.Success)
+            if (!resp.Success)
             {
                 label_error.ForeColor = System.Drawing.Color.Red;
                 label_error.Text = resp.Message;

@@ -21,7 +21,7 @@ namespace PostTraining.Views
             if (Session["user"] != null)
             {
                 Response.Redirect("~/Views/Common/HomePage.aspx");
-                return; 
+                return;
             }
         }
         protected void button_login_Click(object sender, EventArgs e)
@@ -33,7 +33,7 @@ namespace PostTraining.Views
             UserController userController = new UserController();
             Response<User> resp = userController.Login(email, password);
 
-            if(!resp.Success)
+            if (!resp.Success)
             {
                 label_error.ForeColor = System.Drawing.Color.Red;
                 label_error.Text = resp.Message;
@@ -43,7 +43,7 @@ namespace PostTraining.Views
             label_error.ForeColor = System.Drawing.Color.Green;
             label_error.Text = resp.Message + ", redirecting...";
 
-            if(remember)
+            if (remember)
             {
                 HttpCookie cookie = new HttpCookie("user_cookie");
                 cookie.Value = CookieHelper.Encrypt(resp.Payload.Id.ToString());

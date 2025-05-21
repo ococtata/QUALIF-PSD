@@ -13,7 +13,7 @@ namespace PostTraining.Infrastructure.Repositories
 
         public static LocalDatabaseEntities1 GetInstance()
         {
-            if(instance == null)
+            if (instance == null)
             {
                 instance = new LocalDatabaseEntities1();
             }

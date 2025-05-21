@@ -14,7 +14,7 @@ namespace PostTraining.Factories
             User user = new User()
             {
                 Id = id,
-                Name = name,   
+                Name = name,
                 Email = email,
                 Password = password,
                 Role = role

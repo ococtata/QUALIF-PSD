@@ -62,7 +62,7 @@ namespace PostTraining.Views.Admin
 
             Response<Product> resp = productController.CreateProduct(name, tier, price, desc, type, stock);
 
-            if(!resp.Success)
+            if (!resp.Success)
             {
                 label_error.ForeColor = System.Drawing.Color.Red;
                 label_error.Text = resp.Message;

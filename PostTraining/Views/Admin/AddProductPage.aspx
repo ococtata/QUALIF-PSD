@@ -1,4 +1,5 @@
 ﻿<%@ Page Title="Cyberware Store" Language="C#" MasterPageFile="~/Views/Layouts/Header.Master" AutoEventWireup="true" CodeBehind="AddProductPage.aspx.cs" Inherits="PostTraining.Views.Admin.AddProductPage" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
@@ -22,7 +23,7 @@
         </div>
         <div>
             <asp:Label ID="label_type" runat="server" Text="Type"></asp:Label>
-            <asp:TextBox ID="textbox_type" runat="server" ></asp:TextBox>
+            <asp:TextBox ID="textbox_type" runat="server"></asp:TextBox>
         </div>
         <div>
             <asp:Label ID="label_stock" runat="server" Text="Stock"></asp:Label>
