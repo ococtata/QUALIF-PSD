@@ -1,0 +1,25 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Header.master.cs" Inherits="PostTraining.Views.Layouts.Header1" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <title>Cyberware Store</title>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+    <link href="../Styles/Header.css" rel="stylesheet" />
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div class="nav">
+            <asp:Button class="navBtn" ID="button_home" runat="server" Text="Home" />
+            <asp:Button class="navBtn" ID="button_cart" runat="server" Text="Cart" />
+            <asp:Button class="navBtn" ID="button_logout" runat="server" Text="Logout" />
+        </div>
+        <div>
+            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+            </asp:ContentPlaceHolder>
+        </div>
+    </form>
+</body>
+</html>
