@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:tns="http://tempuri.org/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="GetUserTransactions">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="userId" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetUserTransactionsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetUserTransactionsResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CreateTransaction">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="userId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="cartItems" type="tns:ArrayOfCartItemInput" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfCartItemInput">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="CartItemInput" nillable="true" type="tns:CartItemInput" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="CartItemInput">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="UserId" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ProductId" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Quantity" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="CreateTransactionResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="CreateTransactionResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="GetUserTransactionsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetUserTransactions" />
+  </wsdl:message>
+  <wsdl:message name="GetUserTransactionsSoapOut">
+    <wsdl:part name="parameters" element="tns:GetUserTransactionsResponse" />
+  </wsdl:message>
+  <wsdl:message name="CreateTransactionSoapIn">
+    <wsdl:part name="parameters" element="tns:CreateTransaction" />
+  </wsdl:message>
+  <wsdl:message name="CreateTransactionSoapOut">
+    <wsdl:part name="parameters" element="tns:CreateTransactionResponse" />
+  </wsdl:message>
+  <wsdl:portType name="TransactionWebServiceSoap">
+    <wsdl:operation name="GetUserTransactions">
+      <wsdl:input message="tns:GetUserTransactionsSoapIn" />
+      <wsdl:output message="tns:GetUserTransactionsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateTransaction">
+      <wsdl:input message="tns:CreateTransactionSoapIn" />
+      <wsdl:output message="tns:CreateTransactionSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="TransactionWebServiceSoap" type="tns:TransactionWebServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetUserTransactions">
+      <soap:operation soapAction="http://tempuri.org/GetUserTransactions" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateTransaction">
+      <soap:operation soapAction="http://tempuri.org/CreateTransaction" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="TransactionWebServiceSoap12" type="tns:TransactionWebServiceSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetUserTransactions">
+      <soap12:operation soapAction="http://tempuri.org/GetUserTransactions" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateTransaction">
+      <soap12:operation soapAction="http://tempuri.org/CreateTransaction" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="TransactionWebService">
+    <wsdl:port name="TransactionWebServiceSoap" binding="tns:TransactionWebServiceSoap">
+      <soap:address location="https://localhost:44307/WebServices/TransactionWebService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="TransactionWebServiceSoap12" binding="tns:TransactionWebServiceSoap12">
+      <soap12:address location="https://localhost:44307/WebServices/TransactionWebService.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

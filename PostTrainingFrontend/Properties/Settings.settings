@@ -1,0 +1,18 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="PostTrainingFrontend.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="PostTrainingFrontend_UserWebService_UserWebService" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://localhost:44307/WebServices/UserWebService.asmx</Value>
+    </Setting>
+    <Setting Name="PostTrainingFrontend_ProductWebService_ProductWebService" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://localhost:44307/WebServices/ProductWebService.asmx</Value>
+    </Setting>
+    <Setting Name="PostTrainingFrontend_CartWebService_CartWebService" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://localhost:44307/WebServices/CartWebService.asmx</Value>
+    </Setting>
+    <Setting Name="PostTrainingFrontend_TransactionWebService_TransactionWebService" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://localhost:44307/WebServices/TransactionWebService.asmx</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

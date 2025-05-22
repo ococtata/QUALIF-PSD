@@ -41,7 +41,7 @@ namespace PostTraining.Application.Handlers
             };
         }
 
-        public Response<Transaction> CreateTransaction(String userId, List<CartItem> cart)
+        public Response<TransactionHistoryViewModel> CreateTransaction(String userId, List<CartItem> cart)
         {
             Transaction transaction = transFactory.createTransaction(userId, cart);
             transRepo.CreateTransaction(transaction);
@@ -52,7 +52,7 @@ namespace PostTraining.Application.Handlers
 
                 if (!resp.Success)
                 {
-                    return new Response<Transaction>()
+                    return new Response<TransactionHistoryViewModel>()
                     {
                         Success = false,
                         Message = "Failed to reduce stock: " + resp.Message,
@@ -61,11 +61,23 @@ namespace PostTraining.Application.Handlers
                 }
             }
 
-            return new Response<Transaction>()
+            TransactionHistoryViewModel viewModel = new TransactionHistoryViewModel()
+            {
+                TransactionId = transaction.Id.ToString(),
+                OrderDate = transaction.OrderDate,
+                Items = transaction.TransactionDetails.Select(td => new TransactionItemViewModel()
+                {
+                    ProductName = td.Product.Name,
+                    Quantity = td.Quantity,
+                    Price = (float)td.Product.Price,
+                }).ToList()
+            };
+
+            return new Response<TransactionHistoryViewModel>()
             {
                 Success = true,
                 Message = "Transaction created",
-                Payload = transaction
+                Payload = viewModel
             };
         }
     }

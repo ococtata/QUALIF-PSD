@@ -51,6 +51,9 @@
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
@@ -90,27 +93,21 @@
       <DependentUpon>DatabaseModel.edmx</DependentUpon>
       <LastGenOutput>DatabaseModel.cs</LastGenOutput>
     </Content>
-    <Content Include="Views\Admin\AddProductPage.aspx" />
-    <Content Include="Views\Admin\UpdateProductPage.aspx" />
-    <Content Include="Views\Auth\LoginPage.aspx" />
-    <Content Include="Views\Auth\RegisterPage.aspx" />
-    <Content Include="Views\Common\HomePage.aspx" />
-    <Content Include="Views\Customer\CartPage.aspx" />
-    <Content Include="Views\Customer\HistoryPage.aspx" />
-    <Content Include="Views\Styles\Header.css" />
     <Content Include="Web.config" />
+    <Content Include="WebServices\CartWebService.asmx" />
+    <Content Include="WebServices\ProductWebService.asmx" />
+    <Content Include="WebServices\TransactionWebService.asmx" />
+    <Content Include="WebServices\UserWebService.asmx" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Application\Common\CookieHelper.cs" />
+    <Compile Include="Application\Common\Json.cs" />
     <Compile Include="Application\Common\Response.cs" />
     <Compile Include="Application\Handlers\CartHandler.cs" />
     <Compile Include="Application\Handlers\ProductHandler.cs" />
     <Compile Include="Application\Handlers\TransactionHandler.cs" />
     <Compile Include="Application\Handlers\UserHandler.cs" />
-    <Compile Include="Controllers\CartController.cs" />
-    <Compile Include="Controllers\ProductController.cs" />
-    <Compile Include="Controllers\TransactionController.cs" />
-    <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="Domain\DTO\CartItemInput.cs" />
     <Compile Include="Domain\DTO\CartItemViewModel.cs" />
     <Compile Include="Domain\DTO\TransactionHistoryViewModel.cs" />
     <Compile Include="Domain\Models\CartItem.cs">
@@ -154,61 +151,21 @@
     <Compile Include="Infrastructure\Repositories\TransactionRepository.cs" />
     <Compile Include="Infrastructure\Repositories\UserRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Views\Admin\AddProductPage.aspx.cs">
-      <DependentUpon>AddProductPage.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
+    <Compile Include="WebServices\CartWebService.asmx.cs">
+      <DependentUpon>CartWebService.asmx</DependentUpon>
+      <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Views\Admin\AddProductPage.aspx.designer.cs">
-      <DependentUpon>AddProductPage.aspx</DependentUpon>
+    <Compile Include="WebServices\ProductWebService.asmx.cs">
+      <DependentUpon>ProductWebService.asmx</DependentUpon>
+      <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Views\Admin\UpdateProductPage.aspx.cs">
-      <DependentUpon>UpdateProductPage.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
+    <Compile Include="WebServices\TransactionWebService.asmx.cs">
+      <DependentUpon>TransactionWebService.asmx</DependentUpon>
+      <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Views\Admin\UpdateProductPage.aspx.designer.cs">
-      <DependentUpon>UpdateProductPage.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Auth\LoginPage.aspx.cs">
-      <DependentUpon>LoginPage.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Views\Auth\LoginPage.aspx.designer.cs">
-      <DependentUpon>LoginPage.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Auth\RegisterPage.aspx.cs">
-      <DependentUpon>RegisterPage.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Views\Auth\RegisterPage.aspx.designer.cs">
-      <DependentUpon>RegisterPage.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Common\HomePage.aspx.cs">
-      <DependentUpon>HomePage.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Views\Common\HomePage.aspx.designer.cs">
-      <DependentUpon>HomePage.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Customer\CartPage.aspx.cs">
-      <DependentUpon>CartPage.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Views\Customer\CartPage.aspx.designer.cs">
-      <DependentUpon>CartPage.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Customer\HistoryPage.aspx.cs">
-      <DependentUpon>HistoryPage.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Views\Customer\HistoryPage.aspx.designer.cs">
-      <DependentUpon>HistoryPage.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Layouts\Header.Master.cs">
-      <DependentUpon>Header.Master</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Views\Layouts\Header.Master.designer.cs">
-      <DependentUpon>Header.Master</DependentUpon>
+    <Compile Include="WebServices\UserWebService.asmx.cs">
+      <DependentUpon>UserWebService.asmx</DependentUpon>
+      <SubType>Component</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -220,7 +177,6 @@
       <DependentUpon>DatabaseModel.edmx</DependentUpon>
     </Content>
     <None Include="packages.config" />
-    <Content Include="Views\Layouts\Header.Master" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
