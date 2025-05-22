@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="36031025c45141abb34614f3b131bc6f" Name="Diagram1">
+        <EntityTypeShape EntityType="LocalDatabaseModel.CartItem" Width="1.5" PointX="3" PointY="2.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="LocalDatabaseModel.Product" Width="1.5" PointX="0.75" PointY="7" IsExpanded="true" />
+        <EntityTypeShape EntityType="LocalDatabaseModel.TransactionDetail" Width="1.5" PointX="5.25" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="LocalDatabaseModel.Transaction" Width="1.5" PointX="3" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="LocalDatabaseModel.User" Width="1.5" PointX="0.75" PointY="2.25" IsExpanded="true" />
+        <AssociationConnector Association="LocalDatabaseModel.FK_CartItems_ToProducts" ManuallyRouted="false" />
+        <AssociationConnector Association="LocalDatabaseModel.FK_CartItems_ToUsers" ManuallyRouted="false" />
+        <AssociationConnector Association="LocalDatabaseModel.FK_TransactionDetails_ToProducts" ManuallyRouted="false" />
+        <AssociationConnector Association="LocalDatabaseModel.FK_TransactionDetails_ToTransactions" ManuallyRouted="false" />
+        <AssociationConnector Association="LocalDatabaseModel.FK_Transactions_ToUsers" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
