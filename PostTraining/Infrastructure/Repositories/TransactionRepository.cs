@@ -10,17 +10,11 @@ namespace PostTraining.Infrastructure.Repositories
     {
         private LocalDatabaseEntities1 db = Database.GetInstance();
 
-        public List<Transaction> GetTransactions()
-        {
-            List<Transaction> transactions = db.Transactions.ToList();
-
-            return transactions;
-        }
-
         public List<Transaction> GetUserTransactions(String userId)
         {
             List<Transaction> transactions = db.Transactions.Include("TransactionDetails.Product")
-                .Where(t => t.UserId.ToString() == userId).ToList();
+                .Where(t => t.UserId.ToString() == userId).OrderByDescending(t => t.OrderDate)
+                .ToList();
 
             return transactions;
         }
