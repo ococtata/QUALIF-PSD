@@ -19,7 +19,8 @@ namespace PostTraining.Infrastructure.Repositories
 
         public List<Transaction> GetUserTransactions(String userId)
         {
-            List<Transaction> transactions = db.Transactions.Where(t => t.UserId.ToString() == userId).ToList();
+            List<Transaction> transactions = db.Transactions.Include("TransactionDetails.Product")
+                .Where(t => t.UserId.ToString() == userId).ToList();
 
             return transactions;
         }

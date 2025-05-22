@@ -96,6 +96,7 @@
     <Content Include="Views\Auth\RegisterPage.aspx" />
     <Content Include="Views\Common\HomePage.aspx" />
     <Content Include="Views\Customer\CartPage.aspx" />
+    <Content Include="Views\Customer\HistoryPage.aspx" />
     <Content Include="Views\Styles\Header.css" />
     <Content Include="Web.config" />
   </ItemGroup>
@@ -194,6 +195,13 @@
     </Compile>
     <Compile Include="Views\Customer\CartPage.aspx.designer.cs">
       <DependentUpon>CartPage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Customer\HistoryPage.aspx.cs">
+      <DependentUpon>HistoryPage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\Customer\HistoryPage.aspx.designer.cs">
+      <DependentUpon>HistoryPage.aspx</DependentUpon>
     </Compile>
     <Compile Include="Views\Layouts\Header.Master.cs">
       <DependentUpon>Header.Master</DependentUpon>

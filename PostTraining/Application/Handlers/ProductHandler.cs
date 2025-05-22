@@ -123,5 +123,40 @@ namespace PostTraining.Application.Handlers
                 Payload = true,
             };
         }
+
+        public Response<Boolean> ReduceProductStock(String productId, int amount)
+        {
+            Product existing = productRepo.GetProductById(productId);
+
+            if (existing == null)
+            {
+                return new Response<Boolean>()
+                {
+                    Success = false,
+                    Message = "Product not found.",
+                    Payload = false
+                };
+            }
+
+            if (existing.Stock < amount)
+            {
+                return new Response<Boolean>()
+                {
+                    Success = false,
+                    Message = "Insufficient stock.",
+                    Payload = false
+                };
+            }
+
+            existing.Stock -= amount;
+
+            productRepo.UpdateProduct(existing);
+            return new Response<Boolean>()
+            {
+                Success = true,
+                Message = "Reduced stock by " + amount,
+                Payload = true
+            };
+        }
     }
 }

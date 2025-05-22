@@ -116,5 +116,20 @@ namespace PostTraining.Controllers
 
             return productHandler.DeleteProduct(id);
         }
+
+        public Response<Boolean> ReduceProductStock(String productId, int amount)
+        {
+            if (productId.Equals("") || amount.ToString().Equals(""))
+            {
+                return new Response<Boolean>()
+                {
+                    Success = false,
+                    Message = "Input cannot be empty",
+                    Payload = false,
+                };
+            }
+
+            return productHandler.ReduceProductStock(productId, amount);
+        }
     }
 }

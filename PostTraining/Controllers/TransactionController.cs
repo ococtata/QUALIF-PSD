@@ -1,5 +1,6 @@
 ﻿using PostTraining.Application.Common;
 using PostTraining.Application.Handlers;
+using PostTraining.Domain.DTO;
 using PostTraining.Domain.Models;
 using System;
 using System.Collections.Generic;
@@ -38,5 +39,22 @@ namespace PostTraining.Controllers
                 Payload = true,
             };
         }
+        public Response<List<TransactionHistoryViewModel>> GetTransactionHistory(String userId)
+        {
+            Response<List<TransactionHistoryViewModel>> resp = transactionHandler.GetUserTransactions(userId);
+
+            if(!resp.Success)
+            {
+                return new Response<List<TransactionHistoryViewModel>>()
+                {
+                    Success = false,
+                    Message = "Failed to get history for userId: " + userId,
+                    Payload = null,
+                };
+            }
+
+            return resp;
+        }
+
     }
 }

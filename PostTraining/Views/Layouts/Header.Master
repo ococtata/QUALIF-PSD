@@ -15,6 +15,7 @@
             <asp:Button class="navBtn" ID="button_home" runat="server" Text="Home" OnClick="button_home_Click" />
             <asp:Button class="navBtn" ID="button_add" runat="server" Visible="false" Text="Add Product" OnClick="button_add_Click" />
             <asp:Button class="navBtn" ID="button_cart" runat="server" Visible="false" Text="Cart" OnClick="button_cart_Click" />
+            <asp:Button class="navBtn" ID="button_history" runat="server" Visible="false" Text="History" OnClick="button_history_Click" />
             <asp:Button class="navBtn" ID="button_logout" runat="server" Text="Logout" OnClick="button_logout_Click" />
         </div>
         <div>

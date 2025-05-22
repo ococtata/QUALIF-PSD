@@ -31,6 +31,7 @@ namespace PostTraining.Views.Layouts
             else
             {
                 button_cart.Visible = true;
+                button_history.Visible = true;
             }
         }
 
@@ -76,6 +77,14 @@ namespace PostTraining.Views.Layouts
         private void getCurrentPage()
         {
             currentPage = Request.Url.AbsolutePath.ToLower();
+        }
+
+        protected void button_history_Click(object sender, EventArgs e)
+        {
+            if (!currentPage.EndsWith("historypage.aspx"))
+            {
+                Response.Redirect("~/Views/Customer/HistoryPage.aspx");
+            }
         }
     }
 }
