@@ -104,11 +104,14 @@
     <Compile Include="Application\Common\Response.cs" />
     <Compile Include="Application\Handlers\CartHandler.cs" />
     <Compile Include="Application\Handlers\ProductHandler.cs" />
+    <Compile Include="Application\Handlers\TransactionHandler.cs" />
     <Compile Include="Application\Handlers\UserHandler.cs" />
     <Compile Include="Controllers\CartController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
+    <Compile Include="Controllers\TransactionController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Domain\DTO\CartItemViewModel.cs" />
+    <Compile Include="Domain\DTO\TransactionHistoryViewModel.cs" />
     <Compile Include="Domain\Models\CartItem.cs">
       <DependentUpon>DatabaseModel.tt</DependentUpon>
     </Compile>
@@ -141,6 +144,7 @@
     </Compile>
     <Compile Include="Factories\CartFactory.cs" />
     <Compile Include="Factories\ProductFactory.cs" />
+    <Compile Include="Factories\TransactionFactory.cs" />
     <Compile Include="Factories\UserFactory.cs" />
     <Compile Include="Infrastructure\Database\Database.cs" />
     <Compile Include="Infrastructure\Database\ProductSeeder.cs" />

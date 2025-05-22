@@ -136,5 +136,20 @@ namespace PostTraining.Controllers
             return cartHandler.IncreaseItemAmount(userId, productId);
         }
 
+        public Response<Boolean> ClearCart(String userId)
+        {
+            if (userId.Equals(""))
+            {
+                return new Response<Boolean>()
+                {
+                    Success = false,
+                    Message = "UserId is empty",
+                    Payload = false,
+                };
+            }
+
+            return cartHandler.ClearCart(userId);
+        }
+
     }
 }

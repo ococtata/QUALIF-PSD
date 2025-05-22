@@ -130,5 +130,16 @@ namespace PostTraining.Application.Handlers
                 Payload = true
             };
         }
+
+        public Response<Boolean> ClearCart(String userId)
+        {
+            cartRepo.ClearCart(userId);
+            return new Response<Boolean>()
+            {
+                Success = true,
+                Message = "Cart cleared",
+                Payload = true
+            };
+        }
     }
 }

@@ -10,6 +10,24 @@ namespace PostTraining.Infrastructure.Repositories
     {
         private LocalDatabaseEntities1 db = Database.GetInstance();
 
-        
+        public List<Transaction> GetTransactions()
+        {
+            List<Transaction> transactions = db.Transactions.ToList();
+
+            return transactions;
+        }
+
+        public List<Transaction> GetUserTransactions(String userId)
+        {
+            List<Transaction> transactions = db.Transactions.Where(t => t.UserId.ToString() == userId).ToList();
+
+            return transactions;
+        }
+
+        public void CreateTransaction(Transaction transaction)
+        {
+            db.Transactions.Add(transaction);
+            db.SaveChanges();
+        }
     }
 }

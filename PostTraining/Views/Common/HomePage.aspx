@@ -13,7 +13,7 @@
                 <asp:BoundField DataField="Id" HeaderText="Product Id" SortExpression="Id" />
                 <asp:BoundField DataField="Name" HeaderText="Name" SortExpression="Name" />
                 <asp:BoundField DataField="Tier" HeaderText="Tier" SortExpression="Tier" />
-                <asp:BoundField DataField="Price" HeaderText="Price" SortExpression="Price" />
+                <asp:BoundField DataField="Price" HeaderText="Price" SortExpression="Price" DataFormatString="{0:C}" />
                 <asp:BoundField DataField="Desc" HeaderText="Description" SortExpression="Desc" />
                 <asp:BoundField DataField="Type" HeaderText="Type" SortExpression="Type" />
                 <asp:BoundField DataField="Stock" HeaderText="Stock" SortExpression="Stock" />

@@ -18,6 +18,7 @@ namespace PostTraining.Views.Customer
         private ProductController productController = new ProductController();
         private UserController userController = new UserController();
         private CartController cartController = new CartController();
+        private TransactionController transactionController = new TransactionController();
         protected void Page_Load(object sender, EventArgs e)
         {
             label_error.Text = "";
@@ -62,6 +63,7 @@ namespace PostTraining.Views.Customer
 
             List<CartItemViewModel> viewModels = new List<CartItemViewModel>();
 
+            float total = 0;
             foreach (CartItem item in respCart.Payload)
             {
                 Response<Product> respProduct = productController.GetProduct(item.ProductId.ToString());
@@ -80,11 +82,15 @@ namespace PostTraining.Views.Customer
                         Price = (float)product.Price,
                         Quantity = item.Quantity
                     });
+
+                    total += (float)(item.Quantity * product.Price);
                 }
             }
 
             gridview_cart.DataSource = viewModels;
             gridview_cart.DataBind();
+
+            label_total_amount.Text = "$" +  total.ToString();
         }
 
         protected void gridview_cart_RowCommand(object sender, GridViewCommandEventArgs e)
@@ -122,6 +128,23 @@ namespace PostTraining.Views.Customer
                 }
 
                 RefreshCartGridView();
+            }
+        }
+
+        protected void button_order_Click(object sender, EventArgs e)
+        {
+            Response<Boolean> resp =  transactionController.Order(currentUser.Id.ToString());
+
+            if (resp.Success)
+            {
+                label_error.ForeColor = System.Drawing.Color.Green;
+                label_error.Text = resp.Message;
+                RefreshCartGridView(); 
+            }
+            else
+            {
+                label_error.ForeColor = System.Drawing.Color.Red;
+                label_error.Text = resp.Message;
             }
         }
     }
