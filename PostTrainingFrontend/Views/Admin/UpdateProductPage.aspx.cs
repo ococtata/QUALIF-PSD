@@ -1,6 +1,6 @@
 ﻿using PostTrainingFrontend.Controllers;
-using PostTrainingFrontend.Models;
 using PostTrainingFrontend.Models.Common;
+using PostTrainingFrontend.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
