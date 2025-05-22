@@ -1,6 +1,7 @@
 ﻿using PostTrainingFrontend.Models;
 using PostTrainingFrontend.Models.Common;
 using PostTrainingFrontend.Models.DTO;
+using PostTrainingFrontend.TransactionWebService;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,8 +11,8 @@ namespace PostTrainingFrontend.Controllers
 {
     public class TransactionController
     {
-        CartController cartController = new CartController();
-        TransactionHandler transactionHandler = new TransactionHandler();
+        private CartController cartController = new CartController();
+        private TransactionWebService.TransactionWebService transWB = new TransactionWebService.TransactionWebService();
 
         public Response<Boolean> Order(String userId)
         {
@@ -27,7 +28,25 @@ namespace PostTrainingFrontend.Controllers
                 };
             }
 
-            transactionHandler.CreateTransaction(userId, cartResp.Payload);
+            CartItemInput[] cartItemInput = cartResp.Payload.Select(ci => new CartItemInput
+            {
+                ProductId = ci.ProductId.ToString(),
+                UserId = userId,
+                Quantity = ci.Quantity
+            }).ToArray();
+
+            String jsonResponse = transWB.CreateTransaction(userId, cartItemInput);
+            Response<Transaction> transactionResponse = Json.Decode<Response<Transaction>>(jsonResponse);
+            
+            if(!transactionResponse.Success)
+            {
+                return new Response<Boolean>()
+                {
+                    Success = false,
+                    Message = "Order failed: " + transactionResponse.Message,
+                    Payload = false,
+                };
+            }
 
             cartController.ClearCart(userId);
 
@@ -40,7 +59,9 @@ namespace PostTrainingFrontend.Controllers
         }
         public Response<List<TransactionHistoryViewModel>> GetTransactionHistory(String userId)
         {
-            Response<List<TransactionHistoryViewModel>> resp = transactionHandler.GetUserTransactions(userId);
+
+            String jsonResponse = transWB.GetUserTransactions(userId);
+            Response<List<TransactionHistoryViewModel>> resp = Json.Decode<Response<List<TransactionHistoryViewModel>>>(jsonResponse);
 
             if (!resp.Success)
             {

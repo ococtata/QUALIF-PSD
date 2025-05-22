@@ -9,12 +9,13 @@ namespace PostTrainingFrontend.Controllers
 {
     public class ProductController
     {
-        private ProductHandler productHandler = new ProductHandler();
+        private ProductWebService.ProductWebService productWB = new ProductWebService.ProductWebService();
         private String err = "";
 
         public Response<List<Product>> GetProducts()
         {
-            return productHandler.GetProducts();
+            String jsonResponse = productWB.GetProducts();
+            return Json.Decode<Response<List<Product>>>(jsonResponse);    
         }
 
         public Response<Product> GetProduct(String id)
@@ -34,7 +35,8 @@ namespace PostTrainingFrontend.Controllers
                 };
             }
 
-            return productHandler.GetProduct(id);
+            String jsonResponse = productWB.GetProduct(id);
+            return Json.Decode<Response<Product>>(jsonResponse);
         }
         public Response<Product> CreateProduct(String name, int tier, float price, String desc, String type, int stock)
         {
@@ -63,7 +65,8 @@ namespace PostTrainingFrontend.Controllers
                 };
             }
 
-            return productHandler.CreateProduct(name, tier, price, desc, type, stock);
+            String jsonResponse = productWB.CreateProduct(name, tier, price, desc, type, stock);
+            return Json.Decode<Response<Product>>(jsonResponse);
         }
 
         public Response<Product> UpdateProduct(String id, String name, int tier, float price, String desc, String type, int stock)
@@ -92,8 +95,9 @@ namespace PostTrainingFrontend.Controllers
                     Payload = null
                 };
             }
-
-            return productHandler.UpdateProduct(id, name, tier, price, desc, type, stock);
+            
+            String jsonResponse = productWB.UpdateProduct(id, name, tier, price, desc, type, stock);
+            return Json.Decode<Response<Product>>(jsonResponse);
         }
 
         public Response<Boolean> DeleteProduct(String id)
@@ -113,7 +117,8 @@ namespace PostTrainingFrontend.Controllers
                 };
             }
 
-            return productHandler.DeleteProduct(id);
+            String jsonResponse = productWB.DeleteProduct(id);
+            return Json.Decode<Response<Boolean>>(jsonResponse);
         }
 
         public Response<Boolean> ReduceProductStock(String productId, int amount)
@@ -128,7 +133,8 @@ namespace PostTrainingFrontend.Controllers
                 };
             }
 
-            return productHandler.ReduceProductStock(productId, amount);
+            String jsonResponse = productWB.ReduceProductStock(productId, amount);
+            return Json.Decode<Response<Boolean>>(jsonResponse);
         }
     }
 }

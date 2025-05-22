@@ -1,4 +1,5 @@
-﻿using PostTrainingFrontend.Models;
+﻿using PostTrainingFrontend.CartWebService;
+using PostTrainingFrontend.Models;
 using PostTrainingFrontend.Models.Common;
 using System;
 using System.Collections.Generic;
@@ -10,8 +11,9 @@ namespace PostTrainingFrontend.Controllers
     public class CartController
     {
         private String err = "";
-        private CartHandler cartHandler = new CartHandler();
-        private ProductHandler productHandler = new ProductHandler();
+
+        private CartWebService.CartWebService cartWB = new CartWebService.CartWebService();
+        private ProductWebService.ProductWebService productWB = new ProductWebService.ProductWebService();
 
         public Response<List<CartItem>> GetCartItems(String userId)
         {
@@ -25,7 +27,8 @@ namespace PostTrainingFrontend.Controllers
                 };
             }
 
-            return cartHandler.GetCartByUserId(userId);
+            String jsonResponse = cartWB.GetCartByUserId(userId);
+            return Json.Decode<Response<List<CartItem>>>(jsonResponse);
         }
 
         public Response<CartItem> AddCartItem(String userId, String productId, int quantity)
@@ -40,7 +43,8 @@ namespace PostTrainingFrontend.Controllers
                 err = "Quantity must at least be 1";
             }
 
-            Product existing = productHandler.GetProduct(productId).Payload;
+            String jsonProd = productWB.GetProduct(productId);
+            Product existing = Json.Decode<Response<Product>>(jsonProd).Payload;
 
             if (existing == null)
             {
@@ -62,7 +66,8 @@ namespace PostTrainingFrontend.Controllers
                 };
             }
 
-            return cartHandler.AddToCart(userId, productId, quantity);
+            String jsonCart = cartWB.AddToCart(userId, productId, quantity);
+            return Json.Decode<Response<CartItem>>(jsonCart);
         }
 
         public Response<Boolean> RemoveFromCart(String userId, String productId)
@@ -77,7 +82,8 @@ namespace PostTrainingFrontend.Controllers
                 };
             }
 
-            return cartHandler.RemoveFromCart(userId, productId);
+            String jsonResponse = cartWB.RemoveFromCart(userId, productId);
+            return Json.Decode<Response<Boolean>>(jsonResponse);
         }
 
         public Response<Boolean> ReduceItemAmount(String userId, String productId)
@@ -92,7 +98,8 @@ namespace PostTrainingFrontend.Controllers
                 };
             }
 
-            return cartHandler.ReduceItemAmount(userId, productId);
+            String jsonResponse = cartWB.ReduceItemAmount(userId, productId);
+            return Json.Decode<Response<Boolean>>(jsonResponse);
         }
         public Response<Boolean> IncreaseItemAmount(String userId, String productId)
         {
@@ -106,8 +113,11 @@ namespace PostTrainingFrontend.Controllers
                 };
             }
 
-            Product existing = productHandler.GetProduct(productId).Payload;
-            CartItem cartItem = cartHandler.GetCartItem(userId, productId).Payload;
+            String jsonProd = productWB.GetProduct(productId);
+            Product existing = Json.Decode<Response<Product>>(jsonProd).Payload;
+
+            String jsonCart = cartWB.GetCartItem(userId, productId);
+            CartItem cartItem = Json.Decode<Response<CartItem>>(jsonCart).Payload;
 
             if (existing == null)
             {
@@ -132,7 +142,8 @@ namespace PostTrainingFrontend.Controllers
                 };
             }
 
-            return cartHandler.IncreaseItemAmount(userId, productId);
+            String jsonResponse = cartWB.IncreaseItemAmount(userId, productId);
+            return Json.Decode<Response<Boolean>>(jsonResponse);
         }
 
         public Response<Boolean> ClearCart(String userId)
@@ -147,7 +158,8 @@ namespace PostTrainingFrontend.Controllers
                 };
             }
 
-            return cartHandler.ClearCart(userId);
+            String jsonResponse = cartWB.ClearCart(userId);
+            return Json.Decode<Response<Boolean>>(jsonResponse);
         }
 
     }

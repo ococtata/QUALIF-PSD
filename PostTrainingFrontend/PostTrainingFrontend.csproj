@@ -107,6 +107,11 @@
     </Content>
     <None Include="Web References\ProductWebService\ProductWebService.disco" />
     <None Include="Web References\CartWebService\CartWebService.disco" />
+    <Content Include="Web References\TransactionWebService\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </Content>
+    <None Include="Web References\TransactionWebService\TransactionWebService.disco" />
     <Content Include="Web References\UserWebService\Reference.map">
       <Generator>MSDiscoCodeGenerator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
@@ -116,6 +121,7 @@
       <Generator>MSDiscoCodeGenerator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </Content>
+    <None Include="Web References\TransactionWebService\TransactionWebService.wsdl" />
     <None Include="Web References\UserWebService\UserWebService.disco" />
     <Content Include="Web.config" />
   </ItemGroup>
@@ -231,6 +237,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.map</DependentUpon>
     </Compile>
+    <Compile Include="Web References\TransactionWebService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
     <Compile Include="Web References\UserWebService\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -289,6 +300,17 @@
       </CachedDynamicPropName>
       <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
       <CachedSettingsPropName>PostTrainingFrontend_ProductWebService_ProductWebService</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="https://localhost:44307/WebServices/TransactionWebService.asmx">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\TransactionWebService\</RelPath>
+      <UpdateFromURL>https://localhost:44307/WebServices/TransactionWebService.asmx</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>PostTrainingFrontend_TransactionWebService_TransactionWebService</CachedSettingsPropName>
     </WebReferenceUrl>
     <WebReferenceUrl Include="https://localhost:44307/WebServices/UserWebService.asmx">
       <UrlBehavior>Dynamic</UrlBehavior>

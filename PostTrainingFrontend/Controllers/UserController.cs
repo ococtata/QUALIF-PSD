@@ -1,5 +1,6 @@
 ﻿using PostTrainingFrontend.Models;
 using PostTrainingFrontend.Models.Common;
+using PostTrainingFrontend.UserWebService;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,9 +12,10 @@ namespace PostTrainingFrontend.Controllers
     {
         private String err = "";
 
-        private UserHandler userHandler = new UserHandler();
+        private UserWebService.UserWebService userWS = new UserWebService.UserWebService();
         public Response<User> Login(String email, String password)
         {
+
             if (email.Equals("") || password.Equals(""))
             {
                 err = "Input cannot be empty";
@@ -21,7 +23,8 @@ namespace PostTrainingFrontend.Controllers
 
             if (err == "")
             {
-                return userHandler.Login(email, password);
+                String jsonResponse = userWS.Login(email, password);
+                return Json.Decode<Response<User>>(jsonResponse);
             }
 
             return new Response<User>
@@ -49,7 +52,8 @@ namespace PostTrainingFrontend.Controllers
 
             if (err == "")
             {
-                return userHandler.Register(name, email, password);
+                string jsonResponse = userWS.Register(name, email, password);
+                return Json.Decode<Response<User>>(jsonResponse);
             }
 
             return new Response<User>
@@ -72,7 +76,9 @@ namespace PostTrainingFrontend.Controllers
                     Payload = null,
                 };
             }
-            return userHandler.LoginUserByCookie(cookie);
+
+            string jsonResponse = userWS.LoginUserByCookie(cookie);
+            return Json.Decode<Response<User>>(jsonResponse);
         }
     }
 }
