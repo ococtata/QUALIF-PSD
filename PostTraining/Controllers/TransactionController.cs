@@ -18,7 +18,7 @@ namespace PostTraining.Controllers
         {
             Response<List<CartItem>> cartResp = cartController.GetCartItems(userId);
 
-            if (!cartResp.Success)
+            if (cartResp.Payload.Count == 0)
             {
                 return new Response<Boolean>()
                 {

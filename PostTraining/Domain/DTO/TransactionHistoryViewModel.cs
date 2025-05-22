@@ -10,6 +10,14 @@ namespace PostTraining.Domain.DTO
         public string TransactionId { get; set; }
         public DateTime OrderDate { get; set; }
         public List<TransactionItemViewModel> Items { get; set; }
+
+        public float Total
+        {
+            get
+            {
+                return Items?.Sum(i => i.Price * i.Quantity) ?? 0;
+            }
+        }
     }
 
     public class TransactionItemViewModel

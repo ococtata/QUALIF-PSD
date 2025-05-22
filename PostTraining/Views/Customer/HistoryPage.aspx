@@ -13,6 +13,9 @@
                     <asp:BoundField DataField="Price" HeaderText="Price" DataFormatString="{0:C}" />
                 </Columns>
             </asp:GridView>
+            <div>
+                <asp:Label runat="server" Text='<%# "Total: " + string.Format("{0:C}", Eval("Total")) %>'></asp:Label>
+            </div>
             <hr />
         </ItemTemplate>
     </asp:Repeater>
