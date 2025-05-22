@@ -11,12 +11,10 @@ namespace PostTraining.Views.Layouts
     public partial class Header1 : System.Web.UI.MasterPage
     {
         private String currentPage = "";
-        private String homePage = "";
-        private String addProductPage = "";
+
         protected void Page_Load(object sender, EventArgs e)
         {
             getCurrentPage();
-            getHomePage();
 
             User user = Session["user"] as User;
 
@@ -54,7 +52,10 @@ namespace PostTraining.Views.Layouts
 
         protected void button_cart_Click(object sender, EventArgs e)
         {
-
+            if (!currentPage.EndsWith("cartpage.aspx"))
+            {
+                Response.Redirect("~/Views/Customer/CartPage.aspx");
+            }
         }
 
         protected void button_logout_Click(object sender, EventArgs e)
@@ -75,16 +76,6 @@ namespace PostTraining.Views.Layouts
         private void getCurrentPage()
         {
             currentPage = Request.Url.AbsolutePath.ToLower();
-        }
-
-        private void getHomePage()
-        {
-            homePage = ResolveUrl("~/Views/Common/HomePage.aspx").ToLower();
-        }
-
-        private void getAddProductPage()
-        {
-            addProductPage = ResolveUrl("~/Views/Admin/AddProductPage.aspx").ToLower();
         }
     }
 }

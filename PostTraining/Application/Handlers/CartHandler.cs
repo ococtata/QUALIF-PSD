@@ -55,24 +55,69 @@ namespace PostTraining.Application.Handlers
             };
         }
 
+        public Response<CartItem> GetCartItem(String userId, String productId)
+        {
+            CartItem item = cartRepo.GetCartItem(userId, productId);
+
+            return new Response<CartItem>()
+            {
+                Success = true,
+                Message = "Cart item retreived",
+                Payload = item
+            };
+        }
+
         public Response<Boolean> ReduceItemAmount(String userId, String productId)
         {
             CartItem existing = cartRepo.GetCartItem(userId, productId);
 
-            if (existing.Quantity > 0)
+            if (existing == null)
             {
-                existing.Quantity -= 1;
-                cartRepo.UpdateCartItem(existing);
-
                 return new Response<Boolean>()
                 {
-                    Success = true,
-                    Message = "Reduced quantity by 1",
-                    Payload = true
+                    Success = false,
+                    Message = "Item not found in cart.",
+                    Payload = false
                 };
             }
 
+            if (existing.Quantity >= 1)
+            {
+                existing.Quantity -= 1;
+
+                if (existing.Quantity == 0)
+                {
+                    return RemoveFromCart(userId, productId);
+                }
+                else
+                {
+                    cartRepo.UpdateCartItem(existing);
+                    return new Response<Boolean>()
+                    {
+                        Success = true,
+                        Message = "Reduced quantity by 1",
+                        Payload = true
+                    };
+                }
+
+            }
+
             return RemoveFromCart(userId, productId);
+        }
+
+        public Response<Boolean> IncreaseItemAmount(String userId, String productId)
+        {
+            CartItem existing = cartRepo.GetCartItem(userId, productId);
+
+            existing.Quantity += 1;
+            cartRepo.UpdateCartItem(existing);
+
+            return new Response<Boolean>()
+            {
+                Success = true,
+                Message = "Increased quantity by 1",
+                Payload = true
+            };
         }
 
         public Response<Boolean> RemoveFromCart(String userId, String productId)

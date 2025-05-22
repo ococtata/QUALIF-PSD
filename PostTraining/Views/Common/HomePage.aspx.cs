@@ -62,7 +62,7 @@ namespace PostTraining.Views
             }
         }
 
-        public void RefreshProductGridView()
+        private void RefreshProductGridView()
         {
             Response<List<Product>> resp = productController.GetProducts();
 
@@ -111,11 +111,9 @@ namespace PostTraining.Views
                 int index = Convert.ToInt32(e.CommandArgument);
                 GridViewRow row = gridview_product.Rows[index];
 
-                string productId = row.Cells[0].Text;
+                String productId = row.Cells[0].Text;
 
                 TextBox quantityTextbox = (TextBox)row.FindControl("textbox_quantity");
-                System.Diagnostics.Debug.WriteLine("Quantity textbox value: " + quantityTextbox.Text);
-
 
                 int quantity = 0;
 
@@ -128,6 +126,8 @@ namespace PostTraining.Views
 
                 if (resp.Success)
                 {
+                    label_error.ForeColor = System.Drawing.Color.Green;
+                    label_error.Text = resp.Message;
                     RefreshProductGridView();
                 }
                 else
