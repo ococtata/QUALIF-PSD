@@ -22,8 +22,12 @@ namespace PostTrainingFrontend.Models.DTO
 
     public class TransactionItemViewModel
     {
+        public Guid ProductId { get; set; }
         public string ProductName { get; set; }
         public int Quantity { get; set; }
         public float Price { get; set; }
+        public string Type { get; set; }            
+        public string Desc { get; set; }            
+        public int Tier { get; set; }            
     }
 }

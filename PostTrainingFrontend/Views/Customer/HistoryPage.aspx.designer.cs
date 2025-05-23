@@ -15,13 +15,13 @@ namespace PostTrainingFrontend.Views.Customer
     {
 
         /// <summary>
-        /// repeater_transactions control.
+        /// CrystalReportViewer1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Repeater repeater_transactions;
+        protected global::CrystalDecisions.Web.CrystalReportViewer CrystalReportViewer1;
 
         /// <summary>
         /// label_error control.

@@ -7,6 +7,9 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using PostTrainingFrontend.Datasets;
+using PostTrainingFrontend.Models.DTO;
+using PostTrainingFrontend.Reports;
 
 namespace PostTrainingFrontend.Views.Customer
 {
@@ -53,13 +56,46 @@ namespace PostTrainingFrontend.Views.Customer
 
             if (resp.Success)
             {
-                repeater_transactions.DataSource = resp.Payload;
-                repeater_transactions.DataBind();
+                TransactionReport report = new TransactionReport();
+                CrystalReportViewer1.ReportSource = report;
+                report.SetDataSource(GetDataSet(resp.Payload));
             }
             else
             {
                 label_error.Text = resp.Message;
             }
+        }
+
+        private TransactionDataset GetDataSet(List<TransactionHistoryViewModel> transactions)
+        {
+            TransactionDataset dataset = new TransactionDataset();
+            var transactionTable = dataset.Transaction;
+            var detailTable = dataset.TransactionDetail;
+
+            foreach ( var transaction in transactions)
+            {
+                var transactionTableRow = transactionTable.NewRow();
+                transactionTableRow["Id"] = transaction.TransactionId;
+                transactionTableRow["OrderDate"] = transaction.OrderDate;
+                transactionTable.Rows.Add(transactionTableRow);
+
+                foreach ( var i in transaction.Items)
+                {
+                    var detailTableRow = detailTable.NewRow();
+                    detailTableRow["TransactionId"] = transaction.TransactionId;
+                    detailTableRow["ProductId"] = i.ProductId;
+                    detailTableRow["Name"] = i.ProductName;
+                    detailTableRow["Tier"] = i.Tier;
+                    detailTableRow["Price"] = i.Price;
+                    detailTableRow["Desc"] = i.Desc;
+                    detailTableRow["Type"] = i.Type;
+                    detailTableRow["Quantity"] = i.Quantity;
+                    detailTable.Rows.Add(detailTableRow);
+
+                }
+            }
+
+            return dataset;
         }
     }
 }
